@@ -10,6 +10,7 @@ public class MaterialSelector : MonoBehaviour
     [SerializeField] private GameObject saveButton;
     [SerializeField] private GameObject resetButton;
     [SerializeField] private UnityEngine.UI.Button screenshotButton;
+    [SerializeField] private GameObject introScreen;
 
     private Renderer selectedRenderer;
     private Dictionary<GameObject, Material> objectMaterials = new(); // Store materials per object
@@ -36,7 +37,7 @@ public class MaterialSelector : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && selectedRenderer == null)
+        if (Input.GetMouseButtonDown(0) && selectedRenderer == null && !introScreen.activeSelf)
         {
             FreeCameraController.canRotate = false;
             RaycastHit hitObject;
