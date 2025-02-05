@@ -7,7 +7,6 @@ public class MaterialSelector : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TMP_Dropdown colorDropdown;
     [SerializeField] private GameObject popupPanel;
-    [SerializeField] private GameObject sphereCursor;
     [SerializeField] private GameObject saveButton;
     [SerializeField] private GameObject resetButton;
     [SerializeField] private UnityEngine.UI.Button screenshotButton;
@@ -30,7 +29,6 @@ public class MaterialSelector : MonoBehaviour
     private void Start()
     {
         popupPanel.SetActive(false);
-        sphereCursor.SetActive(false);
         PopulateColorDropdown();
         LoadMaterials(); // Load saved materials
         screenshotButton?.onClick.AddListener(TakeScreenshot);
@@ -38,18 +36,6 @@ public class MaterialSelector : MonoBehaviour
 
     private void Update()
     {
-        // Update the sphere cursor to follow the mouse.
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            sphereCursor.SetActive(true);
-            sphereCursor.transform.position = hit.point + new Vector3(0, 0.1f, 0);
-        }
-        else
-        {
-            sphereCursor.SetActive(false);
-        }
-
         if (Input.GetMouseButtonDown(0) && selectedRenderer == null)
         {
             FreeCameraController.canRotate = false;
